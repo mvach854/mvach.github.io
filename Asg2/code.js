@@ -102,9 +102,18 @@ function findPalindromes(txt) {
 function findLongestWords(txt) {
 	let unique = uniqueWords(txt);
 	
-	unique.sort();
+	//unique.sort();
 	unique.sort(function(a,b) {
-		return b.length - a.length; // sort a before b by length, but if they are equal,
+		if (a.length === b.length) {
+			if (a <= b) {
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+		else {
+			return b.length - a.length;
+		}
 	});	
 	return unique.slice(0,10);
 }
@@ -135,10 +144,15 @@ function findMostFrequentWords(txt) {
 	}
 	
 	mostFrequent.sort(function(a,b) {
-		if (a.count < b.count)  {
+		if (a.count === b.count) {
+			if (a.word <= b.word) {
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+		else if (a.count < b.count)  {
 			return 1;
-		} else if (a.count === b.count) {
-			return a.word > b.word;
 		} else {
 			return -1;
 		}
