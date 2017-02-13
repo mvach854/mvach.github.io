@@ -135,17 +135,14 @@ function findMostFrequentWords(txt) {
 	}
 	
 	mostFrequent.sort(function(a,b) {
-		if (a.count === b.count) {
+		if (a.count < b.count)  {
+			return 1;
+		} else if (a.count === b.count) {
 			return a.word > b.word;
 		} else {
-			return a.count < b.count;
+			return -1;
 		}
-	}); // most frequent words sorted by frequency
-	console.log(mostFrequent);
-	//mostFrequent = mostFrequent.sort(function(a,b) {
-//		return a.word > b.word;
-	//}); // most frequent words in alphabetical order
-	//	console.log(mostFrequent);
+	});
 
 	return mostFrequent.slice(0,10).map(function(a) {
 		return a.word + "(" + a.count + ")"
